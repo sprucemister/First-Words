@@ -1,0 +1,39 @@
+---
+title: "Insights Doc"
+output: html_document
+---
+
+Start off with pulling in the data and seeing what we got
+
+```{r}
+library(readxl)
+Raw_Data <- read_excel("Raw Data.xlsx", col_types = c("text","text"))
+```
+```{r}
+head(Raw_Data,4)
+tail(Raw_Data,4)
+```
+
+Looks like there's still dates in there. So I'll remove any `-` `/` or  `0-9`
+```{r, echo=FALSE,results='hide', include=FALSE}
+library(dplyr)
+library(stringr)
+```
+```{r}
+df<-Raw_Data%>%
+  mutate(Word=str_replace_all(Word,'[0-9]|/|-',""))
+head(df,4)
+tail(df,4)
+```
+
+Okay so the **Word** field is cleaned up. Now let's get the date into a date
+format so that we can sort it correctly
+```{r}
+df<-df%>%
+  mutate(Date=as.Date(Date,"%m/%d/%y"))
+head(df,4)
+tail(df,4)
+```
+
+Awesome, everything is formatted right. But we have some missing Dates.
+Let's fill those with `xxxxxxxx`
