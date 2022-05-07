@@ -3,6 +3,19 @@ title: "First Words - Insights"
 output: html_document
 ---
 
+# Stage 0 - Data Collection Process
+This data was collected for 1 year after my son said his first word unprompted
+(i.e. nothing was counted that comes after "Can you say...")
+
+I counted anything regardless of pronunciation if I knew what he meant
+
+This was done on the default iPhone notes app.
+At first, I wasn't consistently collecting date, but later I did
+Sometimes I put a note as to his pronunciation such as`Mattress`=*ma-teuse*
+or context clarity, i.e. `Button`=*Garage Door Clicker*
+So we'll have a little bit of cleanup to do
+![Original Format](./iPhone-Screenshot-Small.png)
+
 # Stage 1 - Data Processing
 Every Project in the real world starts with data cleaning
 
@@ -56,7 +69,7 @@ worked great
 
 Now let's see what insights we can get from our data
 
-# Stage 2 - Visualizations & Analysis
+# Stage 2 - Growth Spurts
 Now the fun part
 First let's group and summarize the data by month
 ```{r,results='hide', include=FALSE}
@@ -104,7 +117,9 @@ ggplot(df.month, aes(x=Months_Old,y=Count)) +
   scale_x_continuous(limits=c(xlim_min.months_old,xlim_max.months_old))
 ```
 
-So that big search was right after the 2nd birthday, interesting!
+So that big surge was right after the 2nd birthday, interesting!
+
+# Stage 3 - Simple Words First
 
 Now, let's test the theory that simpler words are learned younger
 
@@ -140,10 +155,10 @@ By the way, If you have to ask what's `sasqouthanbeek` then you won't get it
 Let's apply that function to our data to count the syllables in each word
 (gotta put `Word` in lowercase since my function is looking for lowercase)
 ```{r}
-df<-df%>%
+df_syllable<-df%>%
   mutate(SyllableCount=count_syllables(tolower(Word)))
-head(df)
-tail(df)
+head(df_syllable)
+tail(df_syllable)
 ```
 Okay, there are some problems here
 * Some words have `[]` and `()`
@@ -153,4 +168,57 @@ On the other hand, it worked really well for words like `Triangle`
 where it counted 2 syllables even though it has a pair of vowels.
 It did that correctly because `ia` isn't in the top 7 pairs I got from Google
 
-Let's fix what we can
+Let's tackle the first issue
+```{r warning=FALSE}
+df_syllable<-df_syllable%>%
+  mutate(loc_bracket = str_locate( Word,c('\\['))[,'start'])%>%
+  mutate(loc_parentheses = str_locate( Word,c('\\('))[,'start'])%>%
+  rowwise()%>%
+  mutate(loc_first=case_when(is.na(loc_bracket)==FALSE |
+                               is.na(loc_parentheses)==FALSE ~
+    min(c(loc_bracket,loc_parentheses),na.rm = TRUE)))%>%
+  mutate(Word_cleaned=case_when(is.na(loc_first)==TRUE~Word
+                          ,TRUE~substr(Word,1,loc_first-1)))%>%
+  select(-loc_bracket,-loc_parentheses)
+
+print(df_syllable%>%filter(is.na(loc_first)==FALSE)%>%tail())
+```
+
+Awesome, `Word_cleaned` will be a lot better to get `SyllableCount` from
+
+Let's do that; and if anything turns up to be 0, we'll set it to 1.
+That'll give us the correct result for things like `[phone] died` above
+
+```{r}
+df_syllable<-df_syllable%>%
+  mutate(SyllableCount=count_syllables(tolower(Word_cleaned)))%>%
+  mutate(SyllableCount=case_when(SyllableCount==0 ~ as.integer(1)
+                                 , TRUE ~ SyllableCount ))
+
+print(df_syllable%>%filter(is.na(loc_first)==FALSE)%>%tail())
+```
+
+Very Nice! Syllable Counts are pretty good now.
+
+Now let's use them to find out if "simpler" (less syllables) words learned first
+
+We'll do that by grouping by month again
+```{r}
+df_syllable.month<-df_syllable%>%
+  mutate(Date_Month=floor_date(Date,"months"))%>%
+  group_by(Date_Month)%>%
+  summarize(SyllableCount_Avg=mean(SyllableCount))
+
+model_lm<-lm(df_syllable.month$SyllableCount_Avg ~ df_syllable.month$Date_Month)
+summary(model_lm)  
+```
+```{r}
+plot(df_syllable.month$Date_Month, 
+     df_syllable.month$SyllableCount_Avg,
+     pch = 16)
+abline(model_lm,col = 4, lwd = 3)
+```
+
+Slightly positive slope, but not a very good fit, so I don't think we can say
+conclusively that simpler (less syllables) words are learned earlier,
+at least for this sample data set
