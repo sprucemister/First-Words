@@ -129,7 +129,7 @@ I devised a dirty way to count that by counting all the vowels (using regex)
 and then subtracting out the most common vowel pairs which are...
 ![Copy and Paste This](./Vowel-Pairs-Search.png)
 
-I'll make a function to county syllables
+I'll make a function to count syllables
 ```{r}
 word<-"sasqouthanbeek"
 
@@ -160,9 +160,9 @@ df_syllable<-df%>%
 head(df_syllable)
 tail(df_syllable)
 ```
-Okay, there are some problems here
-* Some words have `[]` and `()`
-* Some words have 0 syllables (let's set those to 1)
+Okay, there are some problems here:
+1. Some words have `[]` and `()`
+2. Some words have 0 syllables (let's set those to 1)
 
 On the other hand, it worked really well for words like `Triangle`
 where it counted 2 syllables even though it has a pair of vowels.
@@ -215,10 +215,13 @@ summary(model_lm)
 ```{r}
 plot(df_syllable.month$Date_Month, 
      df_syllable.month$SyllableCount_Avg,
-     pch = 16)
+     pch = 16,
+     xlab="Date",
+     ylab="Average Syllable Count",
+     main="Average Syllable Count by Month")
 abline(model_lm,col = 4, lwd = 3)
 ```
 
-Slightly positive slope, but not a very good fit, so I don't think we can say
-conclusively that simpler (less syllables) words are learned earlier,
-at least for this sample data set
+Slightly positive slope, but p-value is too high to say the model is good fit
+so I don't think we can say conclusively that simpler (less syllables) words
+are learned earlier, at least for this sample data set
