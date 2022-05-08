@@ -1,6 +1,8 @@
 ---
 title: "Son's First Words Project"
 output: rmarkdown::github_document
+knit: (function(inputFile, encoding) { rmarkdown::render(inputFile, encoding = encoding, output_file = file.path(dirname(inputFile), 'README.md')) })
+
 ---
 ![Son and Dad 1](./Son1.jpg)
 
@@ -23,6 +25,8 @@ or context clarity, i.e. `Button`=*Garage Door Clicker*...
 So we'll have a little bit of cleanup to do.
 
 ![Original Format](./iPhone-Screenshot-Small.png)
+
+The iPhone note was brought into an Excel file **Raw Data.xlsx**, where `Word` and `Date` columns were parsed from the list. That Excel file was brought into R for analysis in an R Markdown document **Project Insights.R** which generated the **README.md** for visibility in the repo page in GitHub @ https://github.com/sprucemister/First-Words
 
 # Stage 2 - Data Processing
 Every project in the real world starts with data cleaning.
@@ -295,11 +299,11 @@ Also the difference between weekdays and weekends is probably partially due to h
 
 # Stage 6 - Wrap Up
 
-In conclusion
+In conclusion:
 
-* We saw that there was a real peak in words learned around January 2021, right after the 2nd birthday
-* We saw no strong evidence to suggest simpler words (lower syllables) were only able to learned later
-* We saw that more words were learned on average on weekends than weekdays, possibly due to different experiences on weekends (all this may partially be attributed to a data collection issue)
+* We saw that there was a real peak in words learned around January 2021, right after the 2nd birthday.
+* We saw no strong evidence to suggest simpler words (lower syllables) were only able to learned later.
+* We saw that more words were learned on average on weekends than weekdays, possibly due to different experiences on weekends (all this may partially be attributed to a data collection issue).
 
 This was a fun project to learn about my son that I was looking forward to doing for a whole year of manual data collection. Thank you for reading!
 

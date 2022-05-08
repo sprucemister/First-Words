@@ -26,6 +26,12 @@ of cleanup to do.
 
 ![Original Format](./iPhone-Screenshot-Small.png)
 
+The iPhone note was brought into an Excel file **Raw Data.xlsx**, where
+`Word` and `Date` columns were parsed from the list. That Excel file was
+brought into R for analysis in an R Markdown document **Project
+Insights.R** which generated the **README.md** for visibility in the
+repo page in GitHub @ <https://github.com/sprucemister/First-Words>
+
 # Stage 2 - Data Processing
 
 Every project in the real world starts with data cleaning.
@@ -186,7 +192,7 @@ ggplot(df.month, aes(x=Date_Month,y=Count)) +
   theme_minimal()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](C:\Users\Spruce\OneDrive\DOCUME~1\MYCOOL~1\FIRSTW~1\README~1/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 Wow, we saw a big surge centered around January 2021.
 
@@ -213,7 +219,7 @@ ggplot(df.month, aes(x=Months_Old,y=Count)) +
   scale_x_continuous(limits=c(xlim_min.months_old,xlim_max.months_old))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](C:\Users\Spruce\OneDrive\DOCUME~1\MYCOOL~1\FIRSTW~1\README~1/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 So that big surge was right after the 2nd birthday, interesting!
 
@@ -396,7 +402,7 @@ plot(df_syllable.month$Date_Month,
 abline(model_lm,col = 4, lwd = 3)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+![](C:\Users\Spruce\OneDrive\DOCUME~1\MYCOOL~1\FIRSTW~1\README~1/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
 
 Slightly positive slope, but p-value is too high to say the model is
 good fit, so I don’t think we can say conclusively that simpler (less
@@ -444,7 +450,7 @@ ggplot(df.dayofweek_summed, aes(x=Day_of_week,y=Words_Sum)) +
   theme_minimal()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+![](C:\Users\Spruce\OneDrive\DOCUME~1\MYCOOL~1\FIRSTW~1\README~1/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
 
 Not too many patterns day-to-day that I can see.
 
@@ -463,7 +469,7 @@ ggplot(aes(x=Day_of_week,y=Words_Avg)) +
   theme_minimal()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+![](C:\Users\Spruce\OneDrive\DOCUME~1\MYCOOL~1\FIRSTW~1\README~1/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
 
 Okay, so pretty significant difference between Weekdays and Weekends.
 
@@ -477,15 +483,15 @@ did. She’s very busy.
 
 # Stage 6 - Wrap Up
 
-In conclusion
+In conclusion:
 
 -   We saw that there was a real peak in words learned around January
-    2021, right after the 2nd birthday
+    2021, right after the 2nd birthday.
 -   We saw no strong evidence to suggest simpler words (lower syllables)
-    were only able to learned later
+    were only able to learned later.
 -   We saw that more words were learned on average on weekends than
     weekdays, possibly due to different experiences on weekends (all
-    this may partially be attributed to a data collection issue)
+    this may partially be attributed to a data collection issue).
 
 This was a fun project to learn about my son that I was looking forward
 to doing for a whole year of manual data collection. Thank you for
