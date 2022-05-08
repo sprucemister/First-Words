@@ -1,4 +1,4 @@
-Son’s First Words Project
+Son’s First Words
 ================
 
 ![Son and Dad 1](./Son1.jpg)
