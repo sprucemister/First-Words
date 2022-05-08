@@ -18,7 +18,7 @@ that he used to identify an Amazon delivery.
 I counted anything regardless of pronunciation if I or my wife knew what
 he meant.
 
-Data collection was done on the default iPhone notes app. At first, I
+Data collection was done on the default iPhone Notes app. At first, I
 wasn’t consistently collecting date, but later I did. Sometimes I put a
 note as to his pronunciation such as`Mattress`=*ma-teuse* or context
 clarity, i.e. `Button`=*Garage Door Clicker*… So we’ll have a little bit
@@ -226,7 +226,7 @@ So that big surge was right after the 2nd birthday, interesting!
 # Stage 4 - Simple Words First
 
 Now, let’s test the theory that simpler words are learned younger, and
-complex words can’t’ be learned until you’re older.
+complex words can’t be learned until you’re older.
 
 Let’s say that “simple” means less syllables.
 
