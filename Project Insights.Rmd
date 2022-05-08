@@ -43,7 +43,7 @@ head(Raw_Data,4)
 tail(Raw_Data,4)
 ```
 
-Looks like there's still dates in the `Word` column.
+Looks like there are still dates in the `Word` column.
 So I'll remove any `-` `/` or  `0-9`.
 ```{r,results='hide', include=FALSE}
 library(dplyr)

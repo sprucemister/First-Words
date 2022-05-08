@@ -67,8 +67,8 @@ tail(Raw_Data,4)
     ## 3 Try 3/16/2021            03/16/2021
     ## 4 Picking [nose] 3/17/2021 3/17/2021
 
-Looks like there’s still dates in the `Word` column. So I’ll remove any
-`-` `/` or `0-9`.
+Looks like there are still dates in the `Word` column. So I’ll remove
+any `-` `/` or `0-9`.
 
 ``` r
 df<-Raw_Data%>%
