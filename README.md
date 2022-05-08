@@ -497,4 +497,4 @@ This was a fun project to learn about my son that I was looking forward
 to doing for a whole year of manual data collection. Thank you for
 reading!
 
-![Son and Dad 2](./Son1.jpg)
+![Son and Dad 2](./Son2.jpg)
