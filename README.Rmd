@@ -1,6 +1,6 @@
 ---
 title: "Son's First Words Project"
-output: html_document
+output: rmarkdown::github_document
 ---
 ![Son and Dad 1](./Son1.jpg)
 
@@ -21,6 +21,7 @@ At first, I wasn't consistently collecting date, but later I did.
 Sometimes I put a note as to his pronunciation such as`Mattress`=*ma-teuse*
 or context clarity, i.e. `Button`=*Garage Door Clicker*...
 So we'll have a little bit of cleanup to do.
+
 ![Original Format](./iPhone-Screenshot-Small.png)
 
 # Stage 2 - Data Processing
