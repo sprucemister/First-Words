@@ -22,7 +22,9 @@ Data collection was done on the default iPhone notes app. At first, I
 wasn’t consistently collecting date, but later I did. Sometimes I put a
 note as to his pronunciation such as`Mattress`=*ma-teuse* or context
 clarity, i.e. `Button`=*Garage Door Clicker*… So we’ll have a little bit
-of cleanup to do. ![Original Format](./iPhone-Screenshot-Small.png)
+of cleanup to do.
+
+![Original Format](./iPhone-Screenshot-Small.png)
 
 # Stage 2 - Data Processing
 
@@ -184,7 +186,7 @@ ggplot(df.month, aes(x=Date_Month,y=Count)) +
   theme_minimal()
 ```
 
-![](Insights_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
 
 Wow, we saw a big surge centered around January 2021.
 
@@ -211,7 +213,7 @@ ggplot(df.month, aes(x=Months_Old,y=Count)) +
   scale_x_continuous(limits=c(xlim_min.months_old,xlim_max.months_old))
 ```
 
-![](Insights_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 So that big surge was right after the 2nd birthday, interesting!
 
@@ -394,7 +396,7 @@ plot(df_syllable.month$Date_Month,
 abline(model_lm,col = 4, lwd = 3)
 ```
 
-![](Insights_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
 
 Slightly positive slope, but p-value is too high to say the model is
 good fit, so I don’t think we can say conclusively that simpler (less
@@ -442,7 +444,7 @@ ggplot(df.dayofweek_summed, aes(x=Day_of_week,y=Words_Sum)) +
   theme_minimal()
 ```
 
-![](Insights_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
 
 Not too many patterns day-to-day that I can see.
 
@@ -461,7 +463,7 @@ ggplot(aes(x=Day_of_week,y=Words_Avg)) +
   theme_minimal()
 ```
 
-![](Insights_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+![](README_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
 
 Okay, so pretty significant difference between Weekdays and Weekends.
 
