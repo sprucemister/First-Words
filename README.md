@@ -185,14 +185,14 @@ df.month
 Now let’s see what it looks like on the plot!
 
 ``` r
-ggplot(df.month, aes(x=Date_Month,y=Count)) +
+plot<-ggplot(df.month, aes(x=Date_Month,y=Count)) +
   geom_bar(stat='identity', fill="steelblue")+
   geom_text(aes(label=Count), vjust=-0.3, size=3.5)+
   ggtitle("Words Learned By Month")+
   theme_minimal()
 ```
 
-![](C:\Users\Spruce\OneDrive\DOCUME~1\MYCOOL~1\FIRSTW~1\README~1/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+![](./Plots/Words%20Learned%20By%20Month%20-%20Blue.png)
 
 Wow, we saw a big surge centered around January 2021.
 
@@ -211,7 +211,7 @@ xlim_min.months_old<-min(df.month$Months_Old,na.rm = TRUE)-1
 And now let’s plot it again, this time RED!
 
 ``` r
-ggplot(df.month, aes(x=Months_Old,y=Count)) +
+plot<-ggplot(df.month, aes(x=Months_Old,y=Count)) +
   geom_bar(stat='identity', fill="red")+
   geom_text(aes(label=Count), vjust=-0.3, size=3.5)+
   ggtitle("Words Learned By Month")+
@@ -219,7 +219,7 @@ ggplot(df.month, aes(x=Months_Old,y=Count)) +
   scale_x_continuous(limits=c(xlim_min.months_old,xlim_max.months_old))
 ```
 
-![](C:\Users\Spruce\OneDrive\DOCUME~1\MYCOOL~1\FIRSTW~1\README~1/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](./Plots/Words%20Learned%20By%20Month%20-%20Red.png)
 
 So that big surge was right after the 2nd birthday, interesting!
 
@@ -402,7 +402,7 @@ plot(df_syllable.month$Date_Month,
 abline(model_lm,col = 4, lwd = 3)
 ```
 
-![](C:\Users\Spruce\OneDrive\DOCUME~1\MYCOOL~1\FIRSTW~1\README~1/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+![](C:\Users\Spruce\OneDrive\DOCUME~1\MYCOOL~1\FIRSTW~1\README~1/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
 
 Slightly positive slope, but p-value is too high to say the model is
 good fit, so I don’t think we can say conclusively that simpler (less
@@ -443,21 +443,21 @@ df.dayofweek_summed<-df.dayofweek%>%
   group_by(Day_of_week)%>%
   summarize(Words_Sum=n())
 
-ggplot(df.dayofweek_summed, aes(x=Day_of_week,y=Words_Sum)) +
+plot<-ggplot(df.dayofweek_summed, aes(x=Day_of_week,y=Words_Sum)) +
   geom_bar(stat='identity', fill="Yellow")+
   geom_text(aes(label=Words_Sum), vjust=-0.3, size=3.5)+
   ggtitle("Words Sum By Day of Week")+
   theme_minimal()
 ```
 
-![](C:\Users\Spruce\OneDrive\DOCUME~1\MYCOOL~1\FIRSTW~1\README~1/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+![](./Plots/Words%20Sum%20By%20Day%20of%20Week.png)
 
 Not too many patterns day-to-day that I can see.
 
 What if we look at weekdays vs weekends.
 
 ``` r
-df.dayofweek_summed%>%
+plot<-df.dayofweek_summed%>%
   mutate(Day_of_week=case_when(Day_of_week %in% c('Sat','Sun')~'Weekend',
                                TRUE ~ 'Weekday'))%>%
   group_by(Day_of_week)%>%
@@ -469,7 +469,7 @@ ggplot(aes(x=Day_of_week,y=Words_Avg)) +
   theme_minimal()
 ```
 
-![](C:\Users\Spruce\OneDrive\DOCUME~1\MYCOOL~1\FIRSTW~1\README~1/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+![](./Plots/Words%20Sum%20By%20Day%20of%20Week2.png)
 
 Okay, so pretty significant difference between Weekdays and Weekends.
 
