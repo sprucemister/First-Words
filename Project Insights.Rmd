@@ -222,7 +222,9 @@ print(df_syllable%>%filter(is.na(loc_first)==FALSE)%>%tail())
 
 Awesome, `Word_cleaned` will be a lot better to get `SyllableCount` from.
 
-Let's do that; and if anything turns up to be 0, we'll set it to 1.
+Now let's fix the words that showed up as 0 syllables
+
+If anything turns up to be 0, we'll set it to 1. 
 That'll give us the correct result for things like `[phone] died` above.
 
 ```{r}
@@ -248,7 +250,9 @@ df_syllable.month<-df_syllable%>%
 model_lm<-lm(df_syllable.month$SyllableCount_Avg ~ df_syllable.month$Date_Month)
 summary(model_lm)  
 ```
-```{r}
+```{r,results='hide',warning=FALSE,message=FALSE,fig.show='hide',echo=FALSE}
+jpeg(file="Plots/Average Syllable Count Regression.png")
+
 plot(df_syllable.month$Date_Month, 
      df_syllable.month$SyllableCount_Avg,
      pch = 16,
@@ -256,14 +260,10 @@ plot(df_syllable.month$Date_Month,
      ylab="Average Syllable Count",
      main="Average Syllable Count by Month")
 abline(model_lm,col = 4, lwd = 3)
+
+dev.off()
 ```
-```{r,echo=FALSE,results='hide',warning=FALSE, message=FALSE}
-ggsave(
-  path='Plots',
-  filename='Average Syllable Count by Month.png',
-  # plot = plot, # this sets the plot to the latest plotted plot
-  bg = "white")
-```
+![](./Plots/Average Syllable Count Regression.png)
 Slightly positive slope, but p-value is too high to say the model is good fit,
 so I don't think we can say conclusively that simpler (less syllables) words
 are learned earlier, at least for this sample data set.

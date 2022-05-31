@@ -30,7 +30,8 @@ The iPhone note was brought into an Excel file **Raw Data.xlsx**, where
 `Word` and `Date` columns were parsed from the list. That Excel file was
 brought into R for analysis in an R Markdown document **Project
 Insights.R** which generated the **README.md** for visibility in the
-repo page in GitHub @ <https://github.com/sprucemister/First-Words>
+repo page in GitHub @
+<a href="https://github.com/sprucemister/First-Words" class="uri">https://github.com/sprucemister/First-Words</a>
 
 # Stage 2 - Data Processing
 
@@ -162,6 +163,11 @@ df.month<-df%>%
   mutate(Date_Month=floor_date(Date,"months"))%>%
   group_by(Date_Month)%>%
   summarize(Count=n())
+```
+
+    ## `summarise()` ungrouping output (override with `.groups` argument)
+
+``` r
 df.month
 ```
 
@@ -335,8 +341,10 @@ print(df_syllable%>%filter(is.na(loc_first)==FALSE)%>%tail())
 Awesome, `Word_cleaned` will be a lot better to get `SyllableCount`
 from.
 
-Let’s do that; and if anything turns up to be 0, we’ll set it to 1.
-That’ll give us the correct result for things like `[phone] died` above.
+Now let’s fix the words that showed up as 0 syllables
+
+If anything turns up to be 0, we’ll set it to 1. That’ll give us the
+correct result for things like `[phone] died` above.
 
 ``` r
 df_syllable<-df_syllable%>%
@@ -370,7 +378,11 @@ df_syllable.month<-df_syllable%>%
   mutate(Date_Month=floor_date(Date,"months"))%>%
   group_by(Date_Month)%>%
   summarize(SyllableCount_Avg=mean(SyllableCount))
+```
 
+    ## `summarise()` ungrouping output (override with `.groups` argument)
+
+``` r
 model_lm<-lm(df_syllable.month$SyllableCount_Avg ~ df_syllable.month$Date_Month)
 summary(model_lm)  
 ```
@@ -392,21 +404,10 @@ summary(model_lm)
     ## Multiple R-squared:  0.0845, Adjusted R-squared:  0.001276 
     ## F-statistic: 1.015 on 1 and 11 DF,  p-value: 0.3353
 
-``` r
-plot(df_syllable.month$Date_Month, 
-     df_syllable.month$SyllableCount_Avg,
-     pch = 16,
-     xlab="Date",
-     ylab="Average Syllable Count",
-     main="Average Syllable Count by Month")
-abline(model_lm,col = 4, lwd = 3)
-```
-
-![](C:\Users\Spruce\OneDrive\DOCUME~1\MYCOOL~1\FIRSTW~1\README~1/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
-
-Slightly positive slope, but p-value is too high to say the model is
-good fit, so I don’t think we can say conclusively that simpler (less
-syllables) words are learned earlier, at least for this sample data set.
+![](./Plots/Average%20Syllable%20Count%20Regression.png) Slightly
+positive slope, but p-value is too high to say the model is good fit, so
+I don’t think we can say conclusively that simpler (less syllables)
+words are learned earlier, at least for this sample data set.
 
 # Stage 5 - Best Days of Week
 
@@ -442,7 +443,11 @@ October 2020 since new words were pretty sporadic before.
 df.dayofweek_summed<-df.dayofweek%>%
   group_by(Day_of_week)%>%
   summarize(Words_Sum=n())
+```
 
+    ## `summarise()` ungrouping output (override with `.groups` argument)
+
+``` r
 plot<-ggplot(df.dayofweek_summed, aes(x=Day_of_week,y=Words_Sum)) +
   geom_bar(stat='identity', fill="Yellow")+
   geom_text(aes(label=Words_Sum), vjust=-0.3, size=3.5)+
@@ -468,6 +473,8 @@ ggplot(aes(x=Day_of_week,y=Words_Avg)) +
   ggtitle("Words Sum By Day of Week")+
   theme_minimal()
 ```
+
+    ## `summarise()` ungrouping output (override with `.groups` argument)
 
 ![](./Plots/Words%20Sum%20By%20Day%20of%20Week2.png)
 
