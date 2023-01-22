@@ -264,6 +264,7 @@ abline(model_lm,col = 4, lwd = 3)
 dev.off()
 ```
 ![](./Plots/Average Syllable Count Regression.png)
+
 Slightly positive slope, but p-value is too high to say the model is good fit,
 so I don't think we can say conclusively that simpler (less syllables) words
 are learned earlier, at least for this sample data set.
