@@ -404,8 +404,9 @@ summary(model_lm)
     ## Multiple R-squared:  0.0845, Adjusted R-squared:  0.001276 
     ## F-statistic: 1.015 on 1 and 11 DF,  p-value: 0.3353
 
-![](./Plots/Average%20Syllable%20Count%20Regression.png) Slightly
-positive slope, but p-value is too high to say the model is good fit, so
+![](./Plots/Average%20Syllable%20Count%20Regression.png) 
+
+Slightly positive slope, but p-value is too high to say the model is good fit, so
 I don’t think we can say conclusively that simpler (less syllables)
 words are learned earlier, at least for this sample data set.
 
